@@ -1,0 +1,200 @@
+/* frontend/css/styles.css - Design System da Aplicação */
+
+:root {
+    /* Paleta de Cores Premium (Dark Mode Vívido) */
+    --bg-dark: #0f172a;       /* Fundo principal da página (Slate 900) */
+    --bg-surface: #1e293b;    /* Fundo dos cartões e sidebar (Slate 800) */
+    --text-primary: #f8fafc;  /* Texto em destaque (Slate 50) */
+    --text-secondary: #94a3b8;/* Texto descritivo (Slate 400) */
+    --accent-glow: #3b82f6;   /* Azul néon da marca (Blue 500) */
+    --accent-glow-alt: #8b5cf6;/* Roxo néon para gradientes */
+    --border-color: #334155;  /* Divisórias sutis */
+    --glass-bg: rgba(30, 41, 59, 0.7); /* Efeito de vidro */
+    
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif; /* Fonte moderna e limpa */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+}
+
+/* Layout Estrutural */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ========================================= */
+/* MENU LATERAL (SIDEBAR)                    */
+/* ========================================= */
+.sidebar {
+    width: 280px;
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border-color);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.logo h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    /* Efeito de Gradiente no Texto do Logo */
+    background: linear-gradient(135deg, var(--accent-glow), var(--accent-glow-alt));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo span {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.main-menu a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: var(--transition);
+}
+
+/* Micro-interação no Menu */
+.main-menu a:hover, .main-menu a.active {
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    box-shadow: inset 4px 0 0 var(--accent-glow);
+}
+
+/* ========================================= */
+/* ÁREA PRINCIPAL                            */
+/* ========================================= */
+.main-content {
+    flex: 1;
+    padding: 3rem 4rem;
+    overflow-y: auto;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    animation: fadeInDown 0.6s ease;
+}
+
+.top-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+/* ========================================= */
+/* BOTÃO DE DESTAQUE (CALL TO ACTION)        */
+/* ========================================= */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    /* Gradiente moderno e chamativo */
+    background: linear-gradient(135deg, var(--accent-glow), var(--accent-glow-alt));
+    color: white;
+    text-decoration: none;
+    padding: 1.1rem 2rem;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+    transition: var(--transition);
+}
+
+/* Micro-animação de Hover no Botão */
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(59, 130, 246, 0.5);
+}
+
+.btn-primary .icon {
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+/* ========================================= */
+/* GRID DE CARTÕES (DASHBOARD)               */
+/* ========================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    animation: fadeInUp 0.8s ease;
+}
+
+.stat-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    transition: var(--transition);
+    /* Sombra base sutil */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Efeito Glassmorphism Dinâmico no Hover */
+.stat-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(59,130,246, 0.05);
+}
+
+.stat-card h3 {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.stat-value {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+/* ========================================= */
+/* KEYFRAMES (ANIMAÇÕES)                     */
+/* ========================================= */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}

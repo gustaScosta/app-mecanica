@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MecaEste - Painel de Controle</title>
+    <!-- Adicionando a fonte moderna Outfit do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Link para o arquivo de estilização -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- Container principal que abraça o layout -->
+    <div class="dashboard-container">
+        
+        <!-- Menu Lateral (Sidebar) -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>MecaEste</h2>
+                <span>Mecânica & Estética</span>
+            </div>
+            <nav class="main-menu">
+                <a href="index.html" class="active">Painel de Controle</a>
+                <a href="#">Fila de Serviço</a>
+                <a href="#">Agenda (Ficha 360)</a>
+                <a href="#">Relatórios</a>
+            </nav>
+        </aside>
+
+        <!-- Área Principal de Conteúdo -->
+        <main class="main-content">
+            <!-- Cabeçalho (Header) da página -->
+            <header class="top-header">
+                <div>
+                    <h1 id="welcome-message">Bem-vindo(a) ao Sistema!</h1>
+                    <p class="subtitle">Acompanhe a situação da oficina em tempo real.</p>
+                </div>
+                <!-- Botão de Ação Destacado (CTA) -->
+                <div class="header-actions">
+                    <a href="cadastro_veiculo.html" class="btn-primary" id="btn-novo-veiculo">
+                        <span class="icon">+</span> Cadastrar Novo Veículo
+                    </a>
+                </div>
+            </header>
+            
+            <!-- Grid de Estatísticas (Dashboard UI) -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <h3>Veículos na Oficina</h3>
+                    <p class="stat-value">14</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Ordens Concluídas (Hoje)</h3>
+                    <p class="stat-value">5</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Faturamento Estimado</h3>
+                    <p class="stat-value">R$ 3.450</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts Javascript separados por responsabilidade -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
