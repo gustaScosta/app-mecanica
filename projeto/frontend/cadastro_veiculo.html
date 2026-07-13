@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Veículo - MecaEste</title>
+    <!-- Fonte Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Arquivo CSS Base Global -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Arquivo CSS Específico desta tela -->
+    <link rel="stylesheet" href="css/cadastro_veiculo.css">
+</head>
+
+<body>
+    <!-- Container centralizado que limita a largura da tela -->
+    <div class="page-wrapper">
+        
+        <!-- Cabeçalho simples com link de voltar -->
+        <header class="simple-header">
+            <a href="index.html" class="btn-back">← Voltar para o menu</a>
+            <h2>Cadastrar Novo Veículo</h2>
+        </header>
+
+        <!-- Container do Formulário -->
+        <main class="form-container">
+            
+            <!-- Divisão de Mensagens de Sucesso ou Erro (inicialmente oculta) -->
+            <div id="feedback-message" class="hidden"></div>
+
+            <!-- O formulário com id para captura via JS. A semântica usa label + input -->
+            <form id="form-veiculo" class="modern-form">
+                
+                <div class="form-group">
+                    <label for="placa">Placa *</label>
+                    <input type="text" id="placa" name="placa" placeholder="Ex: ABC-1234" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="modelo">Modelo *</label>
+                    <input type="text" id="modelo" name="modelo" placeholder="Ex: Gol" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="marca">Marca *</label>
+                    <input type="text" id="marca" name="marca" placeholder="Ex: Volkswagen" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ano">Ano (Opcional)</label>
+                    <input type="number" id="ano" name="ano" placeholder="Ex: 2020" min="1900" max="2100">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" id="btn-salvar">
+                        <span class="icon">✓</span> Salvar Veículo
+                    </button>
+                </div>
+
+            </form>
+        </main>
+    </div>
+
+    <!-- Scripts de comunicação (api) e controle da página -->
+    <script src="js/api.js"></script>
+    <script src="js/cadastro_veiculo.js"></script>
+</body>
+
+</html>

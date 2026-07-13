@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Catálogo de Serviços - MecaEste</title>
+    <!-- Fonte Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Arquivos de CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cadastro_veiculo.css"> <!-- Para os modais/formularios -->
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>MecaEste</h2>
+                <span>Área Admin</span>
+            </div>
+            <nav class="main-menu">
+                <a href="index.html">Sair do Admin</a>
+                <a href="admin_servicos.html" class="active">Catálogo de Serviços</a>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <h1>Gerenciar Serviços</h1>
+                    <p class="subtitle">Adicione ou apague serviços oferecidos pela oficina.</p>
+                </div>
+            </header>
+
+            <section class="stats-grid">
+                <div class="stat-card" style="grid-column: 1 / -1;">
+                    <h3>Novo Serviço</h3>
+                    <div id="feedback-message" class="hidden"></div>
+                    <form id="form-servico" class="modern-form" style="max-width: 600px;">
+                        <div class="form-group">
+                            <label for="nome">Nome do Serviço *</label>
+                            <input type="text" id="nome" name="nome" placeholder="Ex: Troca de Óleo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descricao">Descrição</label>
+                            <input type="text" id="descricao" name="descricao" placeholder="Detalhes (opcional)">
+                        </div>
+                        <div class="form-group">
+                            <label for="preco">Preço (R$) *</label>
+                            <input type="number" id="preco" name="preco" step="0.01" placeholder="Ex: 50.00" required>
+                        </div>
+                        <div class="form-actions" style="justify-content: flex-start;">
+                            <button type="submit" class="btn-primary" id="btn-salvar">Criar Serviço</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="stat-card" style="grid-column: 1 / -1;">
+                    <h3>Serviços Cadastrados</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Descrição</th>
+                                <th>Preço (R$)</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-servicos-body">
+                            <!-- Preenchido via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/admin_servicos.js"></script>
+</body>
+
+</html>

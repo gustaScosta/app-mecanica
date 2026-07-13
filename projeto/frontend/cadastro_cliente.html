@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Cliente - MecaEste</title>
+    <!-- Fonte Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Arquivos de CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cadastro_veiculo.css"> <!-- Reutilizando estilos de formulário -->
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header class="simple-header">
+            <a href="clientes.html" class="btn-back">← Voltar para Clientes</a>
+            <h2>Cadastrar Novo Cliente</h2>
+        </header>
+
+        <main class="form-container">
+            <div id="feedback-message" class="hidden"></div>
+
+            <form id="form-cliente" class="modern-form">
+                
+                <div class="form-group">
+                    <label for="nome">Nome Completo *</label>
+                    <input type="text" id="nome" name="nome" placeholder="Ex: João da Silva" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="idade">Idade *</label>
+                    <input type="number" id="idade" name="idade" placeholder="Ex: 35" min="18" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpf">CPF *</label>
+                    <input type="text" id="cpf" name="cpf" placeholder="Apenas números" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail *</label>
+                    <input type="email" id="email" name="email" placeholder="Ex: joao@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha *</label>
+                    <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" id="btn-salvar">
+                        <span class="icon">✓</span> Salvar Cliente
+                    </button>
+                </div>
+
+            </form>
+        </main>
+    </div>
+
+    <!-- Scripts de comunicação (api) e controle da página -->
+    <script src="js/api.js"></script>
+    <script src="js/cadastro_cliente.js"></script>
+</body>
+
+</html>

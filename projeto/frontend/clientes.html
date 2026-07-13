@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MecaEste - Clientes</title>
+    <!-- Adicionando a fonte moderna Outfit do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Link para o arquivo de estilização -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>MecaEste</h2>
+                <span>Mecânica & Estética</span>
+            </div>
+            <nav class="main-menu">
+                <a href="index.html">Painel de Controle</a>
+                <a href="clientes.html" class="active">Clientes</a>
+                <a href="veiculos.html">Veículos</a>
+                <a href="servicos.html">Serviços</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header class="top-header">
+                <div>
+                    <h1>Gestão de Clientes</h1>
+                    <p class="subtitle">Gerencie os clientes da oficina.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="cadastro_cliente.html" class="btn-primary">
+                        <span class="icon">+</span> Novo Cliente
+                    </a>
+                </div>
+            </header>
+            
+            <section class="stats-grid">
+                <div class="stat-card" style="grid-column: 1 / -1;">
+                    <h3>Lista de Clientes</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Idade</th>
+                                <th>CPF</th>
+                                <th>E-mail</th>
+                                <th>Data de Cadastro</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-clientes-body">
+                            <!-- Preenchido via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script src="js/clientes.js"></script>
+</body>
+</html>

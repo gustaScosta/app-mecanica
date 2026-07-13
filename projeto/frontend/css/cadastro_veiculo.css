@@ -1,0 +1,131 @@
+/* frontend/css/cadastro_veiculo.css - Estilos específicos para a tela de cadastro */
+
+/* Limita o conteúdo no centro da página */
+.page-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    animation: fadeInUp 0.6s ease;
+}
+
+/* Cabeçalho da página (Voltar + Título) */
+.simple-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+.btn-back {
+    align-self: flex-start;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-back:hover {
+    color: var(--accent-glow);
+    /* Animação suave para indicar a direção da navegação */
+    transform: translateX(-5px);
+}
+
+.simple-header h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+/* Container principal simulando um cartão em vidro/superfície */
+.form-container {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modern-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Etiquetas (Labels) dos inputs */
+.form-group label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Inputs de texto e numérico */
+.form-group input {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-glow);
+    /* Efeito de anel externo de brilho */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.form-group input::placeholder {
+    color: #475569;
+}
+
+/* Botão salvar alinhado à direita */
+.form-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Remover o fundo padrão do browser no button caso sobrescreva algo */
+.form-actions button {
+    border: none;
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ========================================= */
+/* ALERTS / FEEDBACK DE MENSAGENS            */
+/* ========================================= */
+#feedback-message {
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.success-message {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #34d399; /* Verde esmeralda */
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.error-message {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #f87171; /* Vermelho rubi */
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
