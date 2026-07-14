@@ -1,5 +1,5 @@
--- 1. Clientes (Suporta múltiplos carros por cliente)
-CREATE TABLE clientes (
+﻿-- 1. Clientes (Suporta multiplos carros por cliente)
+CREATE TABLE IF NOT EXISTS clientes (
     id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
     nome TEXT NOT NULL,
     idade INTEGER,
@@ -7,12 +7,12 @@ CREATE TABLE clientes (
     email TEXT,
     cpf TEXT UNIQUE,
     senha_hash TEXT,
-    token_acesso TEXT, -- Usado para o login automático (Magic Link)
+    token_acesso TEXT, -- Usado para o login automatico (Magic Link)
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Funcionários (Controle de permissões por setor)
-CREATE TABLE funcionarios (
+-- 2. Funcionarios (Controle de permissoes por setor)
+CREATE TABLE IF NOT EXISTS funcionarios (
     id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
     nome TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
@@ -22,8 +22,8 @@ CREATE TABLE funcionarios (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 3. Veículos (Ligação 1:N com Clientes)
-CREATE TABLE veiculos (
+-- 3. Veiculos (Ligacao 1:N com Clientes)
+CREATE TABLE IF NOT EXISTS veiculos (
     id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
     placa TEXT UNIQUE NOT NULL,
     modelo TEXT NOT NULL,
@@ -32,16 +32,16 @@ CREATE TABLE veiculos (
     cliente_id TEXT REFERENCES clientes(id) ON DELETE CASCADE
 );
 
--- 4. Estados (Estados padrão do sistema + customizados da oficina)
-CREATE TABLE estados (
+-- 4. Estados (Estados padrao do sistema + customizados da oficina)
+CREATE TABLE IF NOT EXISTS estados (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
     tipo TEXT DEFAULT 'PADRAO' CHECK(tipo IN ('PADRAO', 'CUSTOMIZADO')),
     setor_alvo TEXT DEFAULT 'AMBOS' CHECK(setor_alvo IN ('MECANICA', 'ESTETICA', 'AMBOS'))
 );
 
--- 5. Ordens de Serviço (Controle central da Fila e Complicações)
-CREATE TABLE ordens_servico (
+-- 5. Ordens de Servico (Controle central da Fila e Complicacoes)
+CREATE TABLE IF NOT EXISTS ordens_servico (
     id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
     veiculo_id TEXT REFERENCES veiculos(id),
     estado_id INTEGER REFERENCES estados(id),
@@ -52,18 +52,18 @@ CREATE TABLE ordens_servico (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 6. Serviços Prestados (Vinculação de tarefas específicas e responsáveis)
-CREATE TABLE servicos_prestados (
+-- 6. Servicos Prestados (Vinculacao de tarefas especificas e responsaveis)
+CREATE TABLE IF NOT EXISTS servicos_prestados (
     id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
     ordem_servico_id TEXT REFERENCES ordens_servico(id) ON DELETE CASCADE,
-    funcionario_id TEXT REFERENCES funcionarios(id), -- Quem está executando
+    funcionario_id TEXT REFERENCES funcionarios(id), -- Quem esta executando
     descricao_servico TEXT NOT NULL,
     setor TEXT NOT NULL CHECK(setor IN ('MECANICA', 'ESTETICA')),
     status_servico TEXT DEFAULT 'PENDENTE' CHECK(status_servico IN ('PENDENTE', 'EM_ANDAMENTO', 'CONCLUIDO'))
 );
 
--- 7. Histórico e Auditoria de Estados
-CREATE TABLE historico_ordem_servico (
+-- 7. Historico e Auditoria de Estados
+CREATE TABLE IF NOT EXISTS historico_ordem_servico (
     id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
     ordem_servico_id TEXT REFERENCES ordens_servico(id) ON DELETE CASCADE,
     estado_id INTEGER REFERENCES estados(id),
@@ -71,12 +71,12 @@ CREATE TABLE historico_ordem_servico (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- OTIMIZAÇÃO DE BANCO (Índices para Busca Global na Agenda)
-CREATE INDEX idx_veiculos_placa ON veiculos(placa);
-CREATE INDEX idx_clientes_nome ON clientes(nome);
+-- OTIMIZACAO DE BANCO (Indices para Busca Global na Agenda)
+CREATE INDEX IF NOT EXISTS idx_veiculos_placa ON veiculos(placa);
+CREATE INDEX IF NOT EXISTS idx_clientes_nome ON clientes(nome);
 
--- 8. Catálogo de Serviços (Serviços disponíveis para cadastro)
-CREATE TABLE catalogo_servicos (
+-- 8. Catalogo de Servicos (Servicos disponiveis para cadastro)
+CREATE TABLE IF NOT EXISTS catalogo_servicos (
     id TEXT PRIMARY KEY DEFAULT (lower(hex(randomblob(16)))),
     nome TEXT NOT NULL,
     descricao TEXT,

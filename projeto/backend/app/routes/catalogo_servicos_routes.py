@@ -1,4 +1,4 @@
-import sqlite3
+﻿import sqlite3
 import os
 from flask import Blueprint, request, jsonify
 
@@ -26,18 +26,29 @@ def listar_servicos():
 
 @catalogo_servicos_bp.route('/catalogo-servicos', methods=['POST'])
 def criar_servico():
-    dados = request.get_json()
-    nome = dados.get('nome')
-    descricao = dados.get('descricao', '')
+    # Garante que o corpo da requisicao e um JSON valido
+    dados = request.get_json(silent=True)
+    if not dados:
+        return jsonify({'sucesso': False, 'mensagem': 'Corpo da requisicao invalido. Envie um JSON com Content-Type: application/json.'}), 400
+
+    nome = dados.get('nome', '').strip()
+    descricao = dados.get('descricao', '').strip()
     preco = dados.get('preco')
 
-    if not nome or preco is None:
-        return jsonify({'sucesso': False, 'mensagem': 'Nome e preco sao obrigatorios.'}), 400
+    # Validacao dos campos obrigatorios
+    if not nome:
+        return jsonify({'sucesso': False, 'mensagem': 'O campo "nome" e obrigatorio.'}), 400
 
+    if preco is None or preco == '':
+        return jsonify({'sucesso': False, 'mensagem': 'O campo "preco" e obrigatorio.'}), 400
+
+    # Converte preco para float, capturando tanto ValueError quanto TypeError
     try:
         preco_float = float(preco)
-    except ValueError:
-        return jsonify({'sucesso': False, 'mensagem': 'Preco invalido.'}), 400
+        if preco_float < 0:
+            return jsonify({'sucesso': False, 'mensagem': 'O preco nao pode ser negativo.'}), 400
+    except (ValueError, TypeError):
+        return jsonify({'sucesso': False, 'mensagem': 'Valor de preco invalido. Use um numero (ex: 50.00).'}), 400
 
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -47,9 +58,15 @@ def criar_servico():
             (nome, descricao, preco_float)
         )
         conn.commit()
-        return jsonify({'sucesso': True, 'mensagem': 'Servico criado com sucesso!'}), 201
+        novo_id = cursor.lastrowid
+        return jsonify({
+            'sucesso': True,
+            'mensagem': 'Servico criado com sucesso!',
+            'id': novo_id
+        }), 201
     except Exception as e:
-        return jsonify({'sucesso': False, 'mensagem': str(e)}), 500
+        conn.rollback()
+        return jsonify({'sucesso': False, 'mensagem': f'Erro ao salvar no banco de dados: {str(e)}'}), 500
     finally:
         conn.close()
 
@@ -64,6 +81,7 @@ def apagar_servico(id):
         conn.commit()
         return jsonify({'sucesso': True, 'mensagem': 'Servico apagado com sucesso!'}), 200
     except Exception as e:
+        conn.rollback()
         return jsonify({'sucesso': False, 'mensagem': str(e)}), 500
     finally:
         conn.close()
